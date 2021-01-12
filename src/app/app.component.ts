@@ -4,6 +4,11 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+interface Entity {
+  name: String,
+  initiative: any
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,10 +23,12 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+  entityList: Entity[] = [{name: "Test", initiative: 22},{name: "Test2", initiative: 1},]
+
+    initializeApp() {
+      this.platform.ready().then(() => {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      });
+    }
 }
