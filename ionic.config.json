@@ -1,0 +1,8 @@
+{
+  "name": "Initiative Tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "ce382a30"
+}
