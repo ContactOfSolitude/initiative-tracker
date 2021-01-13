@@ -3,7 +3,8 @@
 
   <ion-list *ngIf="entityList">
     <ion-item *ngFor="let item of entityList"> 
-      <ion-label>{{entityList[0].name}}</ion-label>
+      <ion-label>X. {{item.name}}</ion-label>
+      <ion-button color="danger">Delete</ion-button>
     </ion-item>
   </ion-list>
 
