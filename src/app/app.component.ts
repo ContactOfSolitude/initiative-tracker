@@ -3,11 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-interface Entity {
-  name: String,
-  initiative: any
-}
+import { Entity } from './interfaces/entity';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +19,20 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  entityList: Entity[] = [{name: "Test", initiative: 22},{name: "Test2", initiative: 1},]
+  entityListHC: Entity[] = [{ name: "Test", initiative: 22 }, { name: "Test2", initiative: 1 }, { name: "Test3", initiative: 6 }]
+  entityList: Entity[] = this.entityListHC
 
-    initializeApp() {
-      this.platform.ready().then(() => {
-        this.statusBar.styleDefault();
-        this.splashScreen.hide();
-      });
-    }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+
+  deleteEntity(position: number) {
+    this.entityList.splice(position, 1)
+    console.log(this.entityList)
+  }
+
 }
