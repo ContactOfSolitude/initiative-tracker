@@ -5,7 +5,11 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   {
     path: '', component: AppComponent
+  },  {
+    path: 'create-entity',
+    loadChildren: () => import('./pages/create-entity/create-entity.module').then( m => m.CreateEntityPageModule)
   }
+
 ];
 @NgModule({
   imports: [

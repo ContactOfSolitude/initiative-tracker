@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Entity } from './interfaces/entity';
+import { CreateEntityPage } from './pages/create-entity/create-entity.page';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public modalController: ModalController
   ) {
     this.initializeApp();
   }
@@ -33,6 +35,13 @@ export class AppComponent {
   deleteEntity(position: number) {
     this.entityList.splice(position, 1)
     console.log(this.entityList)
+  }
+
+  async showEntityModal() {
+    const modal = await this.modalController.create({
+      component: CreateEntityPage,
+    });
+    return await modal.present();
   }
 
 }
