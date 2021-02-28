@@ -1,10 +1,11 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 
 import { ModalController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Entity } from './interfaces/entity';
 import { CreateEntityPage } from './pages/create-entity/create-entity.page';
+import { EntityService } from './services/entity.service';
 
 @Component({
   selector: 'app-root',
@@ -14,24 +15,20 @@ import { CreateEntityPage } from './pages/create-entity/create-entity.page';
 @Injectable({
   providedIn: 'root'
 })
-export class AppComponent {
-  entityList: Entity[] = [{ name: "Test", initiative: 22 }, { name: "Test2", initiative: 1 }, { name: "Test3", initiative: 6 }]
-
+export class AppComponent implements OnInit {
+  entityList: Entity[] = []
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public modalController: ModalController,
+    public entityService: EntityService
   ) {
     this.initializeApp();
   }
 
-  setEntityList(value: Entity) {
-    this.entityList.push(value);
-  }
-
-  getEntityList() {
-    return this.entityList
+  ngOnInit() { 
+    this.entityList = this.entityService.getEntityList()
   }
 
   initializeApp() {
@@ -43,6 +40,7 @@ export class AppComponent {
 
   deleteEntity(position: number) {
     this.entityList.splice(position, 1)
+    this.entityService.setEntityList(this.entityList)
   }
 
   async showEntityModal() {

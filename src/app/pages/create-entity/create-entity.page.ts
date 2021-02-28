@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AppComponent } from 'src/app/app.component';
 import { Entity } from 'src/app/interfaces/entity';
+import { EntityService } from 'src/app/services/entity.service';
 
 @Component({
   selector: 'app-create-entity',
@@ -10,14 +10,14 @@ import { Entity } from 'src/app/interfaces/entity';
 })
 export class CreateEntityPage implements OnInit {
   entity: Entity = { name: "Test", initiative: 22 }
-  
-  constructor(public appComponent: AppComponent,
+
+  constructor(public entityService: EntityService,
     public modalCtrl: ModalController) { }
 
   ngOnInit() { }
 
   saveEntity() {
-    this.appComponent.setEntityList(this.entity)
+    this.entityService.setEntity(this.entity)
   }
 
   dismissModal() {
