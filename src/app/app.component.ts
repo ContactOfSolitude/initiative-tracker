@@ -11,7 +11,9 @@ import { CreateEntityPage } from './pages/create-entity/create-entity.page';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AppComponent {
   entityList: Entity[] = [{ name: "Test", initiative: 22 }, { name: "Test2", initiative: 1 }, { name: "Test3", initiative: 6 }]
 
@@ -24,6 +26,14 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  setEntityList(value: Entity) {
+    this.entityList.push(value);
+  }
+
+  getEntityList() {
+    return this.entityList
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -33,7 +43,6 @@ export class AppComponent {
 
   deleteEntity(position: number) {
     this.entityList.splice(position, 1)
-    console.log(this.entityList)
   }
 
   async showEntityModal() {
