@@ -27,8 +27,9 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.entityList = this.entityService.getEntityList()
+    console.log("ngOnInit")
   }
 
   initializeApp() {
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit {
 
   async showEntityModal() {
     const modal = await this.modalController.create({
-      component: CreateEntityPage,
+      component: CreateEntityPage
     });
     return await modal.present();
   }

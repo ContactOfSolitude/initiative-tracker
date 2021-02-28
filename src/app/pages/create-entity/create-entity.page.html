@@ -6,10 +6,11 @@
 
 <ion-content>
   <div class="entityForm">
-    <ion-input placeholder="Nombre de la entidad"></ion-input>
-    <ion-input placeholder="Iniciativa"></ion-input>
+    <ion-input [(ngModel)]="entity.name" (keyup)="changeName($event)" placeholder="Nombre de la entidad"></ion-input>
+    <ion-input [(ngModel)]="entity.initiative" (keyup)="changeInitiative($event)" placeholder="Iniciativa"
+      type="number"></ion-input>
     <br><br>
-    <ion-button color="danger" (click)="dismissModal()">Cancelar</ion-button>
-    <ion-button color="success">Añadir</ion-button>
+    <ion-button color="danger" (click)="cancel()">Finalizar</ion-button>
+    <ion-button color="success" (click)="saveEntity()">Añadir</ion-button>
   </div>
 </ion-content>

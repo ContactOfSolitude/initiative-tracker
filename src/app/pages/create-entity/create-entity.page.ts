@@ -9,20 +9,38 @@ import { EntityService } from 'src/app/services/entity.service';
   styleUrls: ['./create-entity.page.scss'],
 })
 export class CreateEntityPage implements OnInit {
-  entity: Entity = { name: "Test", initiative: 22 }
+  entity: Entity = { name: '', initiative: '' }
+  entityList: Entity[] = []
 
   constructor(public entityService: EntityService,
     public modalCtrl: ModalController) { }
 
-  ngOnInit() { }
-
-  saveEntity() {
-    this.entityService.setEntity(this.entity)
+  ngOnInit() {
+    this.entityList = this.entityService.getEntityList()
   }
 
-  dismissModal() {
-    this.saveEntity()
+  saveEntity() {
+    if (this.entity.name != '' && this.entity.initiative != '') {
+      this.entityList.push(this.entity)
+      this.entityList.sort((a, b) => parseFloat(b.initiative) - parseFloat(a.initiative));
+      this.entityService.setEntityList(this.entityList)
+/*       this.entity.name = ''
+      this.entity.initiative = '' */
+      this.modalCtrl.dismiss();
+    } else { }
+
+  }
+
+  cancel() {
     this.modalCtrl.dismiss();
+  }
+
+  changeName(event: any) {
+    this.entity.name = event.target.value
+  }
+
+  changeInitiative(event: any) {
+    this.entity.initiative = event.target.value
   }
 
 }
