@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 
 import { ModalController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -11,19 +11,18 @@ import { CreateEntityPage } from './pages/create-entity/create-entity.page';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+@Injectable()
 export class AppComponent {
+  entityList: Entity[] = [{ name: "Test", initiative: 22 }, { name: "Test2", initiative: 1 }, { name: "Test3", initiative: 6 }]
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public modalController: ModalController
+    public modalController: ModalController,
   ) {
     this.initializeApp();
   }
-
-  entityListHC: Entity[] = [{ name: "Test", initiative: 22 }, { name: "Test2", initiative: 1 }, { name: "Test3", initiative: 6 }]
-  entityList: Entity[] = this.entityListHC
-
 
   initializeApp() {
     this.platform.ready().then(() => {
