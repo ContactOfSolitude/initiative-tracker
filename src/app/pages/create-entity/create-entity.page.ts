@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Entity } from 'src/app/interfaces/entity';
 import { EntityService } from 'src/app/services/entity.service';
 
@@ -13,7 +13,8 @@ export class CreateEntityPage implements OnInit {
   entityList: Entity[] = []
 
   constructor(public entityService: EntityService,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    public toastController: ToastController) { }
 
   ngOnInit() {
     this.entityList = this.entityService.getEntityList()
@@ -24,10 +25,12 @@ export class CreateEntityPage implements OnInit {
       this.entityList.push(this.entity)
       this.entityList.sort((a, b) => parseFloat(b.initiative) - parseFloat(a.initiative));
       this.entityService.setEntityList(this.entityList)
-/*       this.entity.name = ''
-      this.entity.initiative = '' */
+      /*       this.entity.name = ''
+            this.entity.initiative = '' */
       this.modalCtrl.dismiss();
-    } else { }
+    } else {
+      this.missingFieldsToast()
+    }
 
   }
 
@@ -41,6 +44,16 @@ export class CreateEntityPage implements OnInit {
 
   changeInitiative(event: any) {
     this.entity.initiative = event.target.value
+  }
+
+  async missingFieldsToast() {
+    let toast = await this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: 'Faltan Datos'
+    });
+
+    await toast.present();
   }
 
 }
