@@ -1,7 +1,10 @@
 {
   "name": "Initiative Tracker",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular",
   "id": "ce382a30"

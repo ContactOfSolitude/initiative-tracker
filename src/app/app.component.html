@@ -1,7 +1,7 @@
 <ion-app>
   <!-- <ion-router-outlet></ion-router-outlet> -->
 
-  <ion-list *ngIf="entityList">
+  <ion-list *ngIf="entityList" scrollY="true">
     <ion-item *ngFor="let item of entityList let i = index"> 
       <ion-label>{{item.initiative}}. {{item.name}}</ion-label>
       <ion-button color="danger" (click)="this.deleteEntity(i)">Delete</ion-button>
